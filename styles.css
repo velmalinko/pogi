@@ -319,3 +319,87 @@ footer {
     font-size: 1.5rem;
   }
 }
+
+.wave-accordion {
+  width: 90%;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.wave-section {
+  position: relative;
+  background: transparent;
+  cursor: pointer;
+  margin-bottom: 0;
+  margin-top: 0;
+  transition: background 0.2s;
+  outline: none;
+}
+
+.wave-svg {
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+.wave-path {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 0;
+  animation: waveOscillate 2.5s infinite linear alternate;
+}
+
+@keyframes waveOscillate {
+  0% {
+    d: path('M0,30 Q200,60 400,30 T800,30');
+  }
+  50% {
+    d: path('M0,30 Q200,0 400,30 T800,30');
+  }
+  100% {
+    d: path('M0,30 Q200,60 400,30 T800,30');
+  }
+}
+
+.wave-headline {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 2rem;
+  font-family: "Stretch Pro", Arial, sans-serif;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 2;
+  text-shadow: 0 2px 8px #101010;
+}
+
+.wave-section.open .wave-headline,
+.wave-section:hover .wave-headline,
+.wave-section:focus .wave-headline {
+  opacity: 1;
+}
+
+.wave-content {
+  width: 100%;
+  background: rgba(16,16,16,0.95);
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 1.5rem 2rem;
+  box-sizing: border-box;
+  border-radius: 0 0 1.5rem 1.5rem;
+  margin-top: -10px;
+  opacity: 1;
+  transition: max-height 0.4s cubic-bezier(.77,0,.18,1), opacity 0.3s;
+}
+
+.wave-section:not(.open) .wave-content {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
